@@ -1,13 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { MessageRepository } from './messages.repository';
 
+@Injectable()
 export class MessageService {
-  messageRepo: MessageRepository;
-
-  constructor() {
-    //services creating itw own dependencies
-    //but this will be handled by nest js using DI
-    this.messageRepo = new MessageRepository();
-  }
+  constructor(public messageRepo: MessageRepository) {}
 
   findOne(id: string) {
     this.messageRepo.findOne(id);
@@ -16,7 +12,7 @@ export class MessageService {
   findAll() {
     this.messageRepo.findAll();
   }
-  create(message: string) {
-    this.create(message);
+  create(content: string) {
+    this.messageRepo.create(content);
   }
 }

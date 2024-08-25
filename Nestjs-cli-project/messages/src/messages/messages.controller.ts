@@ -1,13 +1,17 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateMessageDto } from './dtos/create-message.dto';
 import { MessageService } from './messages.services';
 @Controller('messages')
 export class MessagesController {
-  messageService: MessageService;
-  constructor() {
-    //do not write in actual app as this will be handled by the nest js DI
-    this.messageService = new MessageService();
-  }
+  constructor(public messageService: MessageService) {}
   @Get()
   listMessages() {
     return this.messageService.findAll();
